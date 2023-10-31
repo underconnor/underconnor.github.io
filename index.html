@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIAN WAR: SEASON 2</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="favicon" href="https://imgur.com/gtn3Tei">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        #header {
+            background-image: url('https://i.imgur.com/PQG7DgB.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: height 0.5s ease-in-out;
+        }
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay h1 {
+            font-size: calc(8vw + 1em);
+            transition: height 0.5s ease-in-out;
+            background: url('https://i.imgur.com/PQG7DgB.png');
+            background-size: cover;
+            background-position: center;
+            background-size: auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        #countdown {
+            text-align: center;
+            padding: 20px;
+            background-color: #000;
+        }
+
+        #timer {
+            font-size: 4vw;
+            color: #fff;
+            font-family: 'Anton', sans-serif;
+            text-align: center;
+        }
+
+        #teaser {
+            background-color: #000;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<section id="header">
+    <div class="overlay">
+        <h1>LIAN WAR: SEASON 2</h1>
+    </div>
+</section>
+<span id="scrollY"></span>
+<section id="countdown">
+    <span id="timer"></span>
+</section>
+<section id="teaser">
+    <div id="youtube-embed"><iframe height=0 src=""></iframe></div>
+</section>
+<script>
+    const endDate = new Date('2023-12-22T23:00:00');
+    const timer = document.getElementById('timer');
+
+    function updateTimer() {
+        const now = new Date();
+        const remainingTime = endDate - now;
+
+        const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+        timer.innerHTML = `${days} . ${hours} . ${minutes} . ${seconds}`;
+    }
+
+    setInterval(updateTimer, 500);
+    updateTimer();
+
+    let scrollY = 0;
+
+    window.addEventListener('scroll', function () {
+        scrollY = window.scrollY;
+
+        const title = document.querySelector('.overlay h1');
+        const opacity = 1 - scrollY / document.body.scrollHeight;
+        title.style.color = opacity > 0 ? 'white' : 'transparent';
+    });
+</script>
+</body>
+</html>
